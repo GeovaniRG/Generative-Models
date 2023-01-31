@@ -10,3 +10,15 @@ To create a deep learning model using GANs for text generation in Python, you ca
 * Train the Model: Train both the generator and discriminator models together by using adversarial loss and updating the weights of both models based on the results of each iteration.
 * Generate Text Samples: After the model is trained, you can use the generator to generate new text samples.
 * Evaluate the generated samples: Evaluate the generated text samples to ensure they are diverse and coherent in nature.
+
+# generative_models.py
+
+This code is a implementation of Generative Adversarial Networks (GANs) for generating text samples. The code defines 3 models, the generator, the discriminator, and the GAN.
+
+The generator model takes a noise vector of shape (batch_size, input_dim) as input and outputs text sequences of shape (batch_size, seq_length, hidden_dim). It uses a dense layer, batch normalization and LSTM layer to generate the text sequences.
+
+The discriminator model takes in text sequences of shape (batch_size, seq_length, input_dim) and outputs a binary classification with shape (batch_size, seq_length, 1) indicating whether the input text sequence is real or fake. It uses LSTM, batch normalization and dense layers to perform the classification.
+
+The GAN model combines the generator and discriminator models. It takes in noise vectors and outputs the generated text sequence along with the binary classification result. The model is then compiled using binary cross entropy as the loss function and Adam optimizer.
+
+The code trains the GAN model for a specified number of epochs and batches. In each iteration, a batch of real text data is obtained and used to train the discriminator. The generator is then used to generate fake text data and this is also used to train the discriminator. The loss from both real and fake text data training is used to update the weights of the discriminator. The loss from the discriminator is then backpropagated to the generator to update its weights.
